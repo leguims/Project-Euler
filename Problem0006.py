@@ -17,14 +17,14 @@ def main():
     print(Enonce)
     print(40*"-")
 
-    max = 100 #10
+    maxi = 100 #10
 
     print(f" * Brute force implementation : ")
-    sumOfSquare = sum([pow(i, 2) for i in range(1, max +1)])
-    squareOfSum = pow(sum(range(1, max +1)), 2)
+    sumOfSquare = sum([pow(i, 2) for i in range(1, maxi +1)])
+    squareOfSum = pow(sum(range(1, maxi +1)), 2)
     difference = squareOfSum - sumOfSquare
-    print(f"Sum Of Square of first {max} natural = {sumOfSquare}")
-    print(f"Square Of Sum of first {max} natural = {squareOfSum}")
+    print(f"Sum Of Square of first {maxi} natural = {sumOfSquare}")
+    print(f"Square Of Sum of first {maxi} natural = {squareOfSum}")
     print(f"Difference = {difference}")
 
     print("""
@@ -37,13 +37,13 @@ Square Of Sum - Sum Of Square = 2x( SUM[M=1;N-1](M x SUM[S=M+1;N](S)))
 Solution =  2x( SUM[M=1;N-1](M x SUM[S=M+1;N](S)))
 """)
     Solution = 0
-    for M in range(1, max):
-        for S in range(M+1, max+1):
-            Solution = Solution + M*S
+    for M in range(1, maxi):
+        S = maxi*(maxi+1)/2 - (M)*(M+1)/2 # = SUM[S=M+1;N](S)
+        Solution = Solution + round(M*S)
     Solution = 2 * Solution
 
     if difference != Solution:
-        print("'Brute force' implementation is different then 'Smart' implementation !!")
+        print("'Brute force' implementation is different than 'Smart' implementation !!")
     
     print(40*"-")
     print(f"Solution = {Solution}")
