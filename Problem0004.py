@@ -13,32 +13,34 @@ class Product:
       self.size = size
     else:
       self.size = 2
-    self.factors = [int(self.size*'9'), int(self.size*'9')]
 
   def __iter__(self):
+    self.factors = [int(self.size*'9'), int(self.size*'9')]
     return self
 
   def __next__(self):
-    if self.factors == [0, 0] :
+    if self.factors == [99, 99] :
         raise StopIteration
     product, factor1, factor2 = self.factors[0]*self.factors[1], self.factors[0], self.factors[1]
     # next values
     if self.factors[0] == 0 :
-      self.factors[0] = self.factors[1] = self.factors[1]-1
+      self.factors[0] = int(self.size*'9')
+      self.factors[1] = self.factors[1]-1
     else:
       self.factors[0] = self.factors[0] - 1
     return product, factor1, factor2
 
 def isPalindrome(number):
-  #print(f"len(str(number))={len(str(number))} ; str(number)={str(number)} ; str(number)[-1::-1]={str(number)[-1::-1]}")
-  return (len(str(number)) > 1) and (str(number) == str(number)[-1::-1])
+  number_str = str(number)
+  #print(f"len(number_str)={len(number_str)} ; number_str={number_str} ; number_str[-1::-1]={number_str[-1::-1]}")
+  return (len(number_str) >= 1) and (number_str == number_str[-1::-1])
 
 def main():
     print(40*"=")
     print(Enonce)
     print(40*"-")
 
-    #import time
+    import time
     
     #start = time.perf_counter()
     #Solutions = {}
@@ -54,7 +56,7 @@ def main():
     #end = time.perf_counter()
     #print(f"{Solution} en {end-start} secondes")
     
-    #start = time.perf_counter()
+    start = time.perf_counter()
     Solution = [0, 0, 0]
     digits = 3 #2
     for product, factor1, factor2 in Product(digits):
@@ -62,8 +64,8 @@ def main():
         Solution = [product, factor1, factor2]
     product, factor1, factor2 = Solution
     Solution = f"{factor1} x {factor2} = {product} is the highest palindrome with {digits} digits)"
-    #end = time.perf_counter()
-    #print(f"{Solution} en {end-start} secondes")
+    end = time.perf_counter()
+    print(f"{Solution} en {end-start} secondes")
     print(f"{Solution}")
 
     print(40*"-")
