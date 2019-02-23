@@ -24,10 +24,10 @@ Solution = 2*2*2*2*3*3*5*7*11*13*17*19
 """)
     Solution = 2*2*2*2*3*3*5*7*11*13*17*19
     for i in range(1, 21):
-      if (Solution % i) == 0:
-        print(f"{Solution}/{i} = {Solution//i}")
-      else:
-        print(f"{Solution} cannot be divided by {i}")
+        if (Solution % i) == 0:
+            print(f"{Solution}/{i} = {Solution//i}")
+        else:
+            print(f"{Solution} cannot be divided by {i}")
     
     print(40*"-")
     print("Solution = {}".format(Solution))

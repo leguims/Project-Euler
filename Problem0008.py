@@ -62,16 +62,16 @@ def main():
     index = 0
     max_index = len(digit1000)-1 - size
     while index < max_index:
-      factors = digit1000[index : index+size]
-      #print(f"{index}/{max_index} : {factors}")
-      while 0 in factors :
-        index = index + 1
         factors = digit1000[index : index+size]
-      product = reduce(mul, factors, 1)
-      if product > greatest_product:
-        greatest_factors = factors
-        greatest_product = product
-      index = index + 1
+        #print(f"{index}/{max_index} : {factors}")
+        while 0 in factors :
+            index = index + 1
+            factors = digit1000[index : index+size]
+        product = reduce(mul, factors, 1)
+        if product > greatest_product:
+            greatest_factors = factors
+            greatest_product = product
+        index = index + 1
     Solution = greatest_product
 
     print(f"The greatest product is {Solution} with factors {greatest_factors}")

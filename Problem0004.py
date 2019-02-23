@@ -16,16 +16,17 @@ class Product:
 
   def __iter__(self):
     self.factors = [int(self.size*'9'), int(self.size*'9')]
+    self.end = [int((self.size-1)*'9'), int((self.size-1)*'9')]
     return self
 
   def __next__(self):
-    if self.factors == [99, 99] :
+    if self.factors == self.end :
         raise StopIteration
     product, factor1, factor2 = self.factors[0]*self.factors[1], self.factors[0], self.factors[1]
     # next values
     if self.factors[0] == 0 :
       self.factors[0] = int(self.size*'9')
-      self.factors[1] = self.factors[1]-1
+      self.factors[1] = self.factors[1] - 1
     else:
       self.factors[0] = self.factors[0] - 1
     return product, factor1, factor2

@@ -6,6 +6,8 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 What is the 10 001st prime number?
 """
 
+import EulerTools
+
 # Iterator style
 class PrimeNumber:
   def __init__(self, rank=1):
@@ -33,11 +35,27 @@ def main():
     print(Enonce)
     print(40*"-")
 
+    import time
     rank = 10_001 #6  
+    
+    # About 3mins !
+    start = time.perf_counter()
     for prime in PrimeNumber(rank):
-      #print(prime)
-      pass
+        #print(prime)
+        pass
+    end = time.perf_counter()
     Solution = prime
+    print(f"{Solution} en {round(end-start,2)} secondes")
+    print(f"The {rank}th prime number is {Solution}")
+    
+    # About 3s !
+    start = time.perf_counter()
+    for prime in EulerTools.PrimeNumber(rank = rank):
+        #print(prime)
+        pass
+    end = time.perf_counter()
+    Solution = prime
+    print(f"{Solution} en {round(end-start,2)} secondes")
     print(f"The {rank}th prime number is {Solution}")
     
     print(40*"-")
