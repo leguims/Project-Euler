@@ -29,6 +29,7 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 
 from operator import mul
 from functools import reduce
+import EulerTools
 
 def main():
     print(40*"=")
@@ -73,7 +74,10 @@ def main():
             greatest_product = product
         index = index + 1
     Solution = greatest_product
+    print(f"The greatest product is {Solution} with factors {greatest_factors}")
 
+    greatest_product, greatest_factors = EulerTools.maxLineProduct(digit1000, size)
+    Solution = greatest_product
     print(f"The greatest product is {Solution} with factors {greatest_factors}")
     
     print(40*"-")
