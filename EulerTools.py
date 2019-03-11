@@ -41,7 +41,10 @@ class PrimeNumber:
     def __init__(self, rank=None, highest_value=None):
         self.current = 2
         self.index = rank
-        self.highest_value = highest_value
+        if highest_value:
+            self.highest_current = math.ceil(math.sqrt(highest_value))
+        else:
+            self.highest_current = None
 
     def __iter__(self):
         return self
@@ -52,8 +55,8 @@ class PrimeNumber:
                 raise StopIteration
             self.index = self.index - 1
         while(True):
-            if self.highest_value is not None:
-                if (self.highest_value < self.current) :
+            if self.highest_current is not None:
+                if (self.highest_current < self.current) :
                     raise StopIteration
             for multiple in range(2, math.ceil(math.sqrt(self.current)) + 1):
                 if (self.current % multiple == 0) and (self.current != multiple):
@@ -64,8 +67,52 @@ class PrimeNumber:
 
     def nextNumber(self):
         save = self.current
-        self.current = self.current + 2 if self.current != 2 else self.current + 1
+        self.current = self.current + 2 if self.current != 2 else 3
         return save
+
+class PrimeFactor:
+    """Return prime factors limit by rank or highest value."""
+    def __init__(self, highest_value, rank=None):
+        self.rest = highest_value
+        self.prime_number = PrimeNumber(rank=rank, highest_value=highest_value)
+
+    def __iter__(self):
+        self.prime_number.__iter__()
+        return self
+
+    def __next__(self):
+        while True:
+            next_prime_number = self.prime_number.__next__()
+            if self.rest%next_prime_number == 0:
+                while self.rest%next_prime_number == 0:
+                    self.rest = self.rest/next_prime_number
+                return next_prime_number
+            if self.rest == 1:
+                raise StopIteration
+
+class PrimeFactorRepeated:
+    """Return all repeated or not prime factors limit by rank or highest value."""
+    def __init__(self, rank=None, highest_value=None):
+        self.rest = highest_value
+        self.prime_number = PrimeNumber(rank=rank, highest_value=highest_value)
+        self.current_prime_number = None
+        self.current_prime_number_power = None
+
+    def __iter__(self):
+        self.prime_number.__iter__()
+        return self
+
+    def __next__(self):
+        while True:
+            if self.current_prime_number :
+                if self.rest%self.current_prime_number == 0:
+                    self.rest = self.rest/self.current_prime_number
+                    self.current_prime_number_power = self.current_prime_number_power + 1
+                    return pow(self.current_prime_number, self.current_prime_number_power)
+            self.current_prime_number = self.prime_number.__next__()
+            self.current_prime_number_power = 0
+            if self.rest == 1:
+                raise StopIteration
 
 
 class Palindrome:
