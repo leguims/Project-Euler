@@ -23,7 +23,7 @@ def main():
     end = time.perf_counter()
     print(f"Solution={Solution} en {round(end-start,2)} secondes")
 
-    print(f"The sum of all prime factors below {maxi} in {Solution}.")
+    print(f"The sum of all prime factors below {maxi} is {Solution}.")
     
     print(40*"-")
     print(f"Solution = {Solution}")

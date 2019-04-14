@@ -42,7 +42,7 @@ class PrimeNumber:
         self.current = 2
         self.index = rank
         if highest_value:
-            self.highest_current = math.ceil(math.sqrt(highest_value))
+            self.highest_current = highest_value
         else:
             self.highest_current = None
 
@@ -162,11 +162,26 @@ class Base10Base2Palindrome:
 
 
 # Functions
+def isPrimeNumber(number):
+    for multiple in range(2, math.ceil(math.sqrt(number)) + 1):
+        if (number % multiple == 0) and (number != multiple):
+            return False
+    else:
+        return True
+
 def isPalindrome(number):
     number_str = str(number)
     #print(f"len(number_str)={len(number_str)} ; number_str={number_str} ; number_str[-1::-1]={number_str[-1::-1]}")
     return (len(number_str) >= 1) and (number_str == number_str[-1::-1])
 
+# Functions
+def isCircularPrime(number):
+    number_str = str(number)
+    circular = [int(number_str[i:]+number_str[0:i]) for i in range(len(number_str))]
+    circular_prime = [isPrimeNumber(n) for n in circular]
+    #print(f"Circular={circular}")
+    #print(f"Circular Prime={circular_prime}")
+    return {'isCircularPrime': all(circular_prime), 'CircularPrimeList': circular}
 
 def maxGridProduct(grid, productSize):
     greatest_product = 0
