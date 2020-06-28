@@ -41,10 +41,7 @@ class PrimeNumber:
     def __init__(self, rank=None, highest_value=None):
         self.current = 2
         self.index = rank
-        if highest_value:
-            self.highest_current = highest_value
-        else:
-            self.highest_current = None
+        self.highest_current = highest_value if highest_value else None
 
     def __iter__(self):
         return self
@@ -159,6 +156,31 @@ class Base10Base2Palindrome:
             value_binary_string = "{0:b}".format(value)
             if value_binary_string == value_binary_string[-1::-1] :
                 return value
+
+
+class Pandigital:
+    """Construct pandigital between start and end values"""
+    def __init__(self, start = 1, end = 9_876_543_210, reverse = False):
+        self.start = start
+        self.end = end # Max Pandigital number 
+        self.reverse = reverse
+        self.value = self.start if not self.reverse else self.end
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.value = self.value + 1 if not self.reverse else self.value - 1
+        while(True):
+            string = str(self.value)
+            if (self.value > self.end) or (self.value < self.start):
+                raise StopIteration
+            for i in string:
+                if string.count(i) > 1:
+                    self.value = self.value + 1 if not self.reverse else self.value - 1
+                    break
+            else:
+                return self.value
 
 
 # Functions
